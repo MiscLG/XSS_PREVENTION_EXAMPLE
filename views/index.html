@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--Doctype makes sure items are parse in the proper format across browsers-->
+<html>
+
+<head>
+  <!--setting the encoding type will prevent exploits written in a different encodings-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta lang="en">
+  <title>Data Input</title>
+</head>
+
+<body>
+  <form action="http://localhost:8081/hello" method="POST">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name">
+    <br>
+    <label for="DOB">Birthdate</label>
+    <input type="date" id="DOB" name="DOB" max="2021-07-31">
+    <br>
+    <input type="submit" value="Submit">
+    <!-- Using proper input types can help mitigate attacks, but is not sufficient-->
+  </form>
+
+  <script>
+    //sets max date to today's date
+    let today = new Date();
+    let mm = today.getMonth() + 1;
+    let dd = today.getDate();
+    today = `${today.getFullYear()}-${(mm > 9 ? '' : '0') + mm}-${(dd > 9 ? '' : '0') + dd}`
+    document.querySelector("#DOB").setAttribute("max", today);
+    console.log(today)
+  </script>
+</body>
+
+</html>
